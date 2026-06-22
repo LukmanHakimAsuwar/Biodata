@@ -127,6 +127,14 @@
             border: 2px solid #2d1b12;
             flex-shrink: 0;
             position: relative;
+            overflow: hidden;
+            object-fit: cover;
+        }
+        .avatar-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .avatar-placeholder i {
             filter: drop-shadow(0 0 6px #d68f5c);
@@ -149,7 +157,7 @@
             text-shadow: 0 2px 10px #2f1d12;
             margin-bottom: 0.2rem;
         }
-        .name-title h1 .water {
+        .name-title h1 .Engineer {
             font-weight: 300;
             font-size: 1.6rem;
             color: #b0876a;
@@ -361,6 +369,40 @@
             color: #d4a373;
             margin-right: 0.3rem;
         }
+
+        /* File input styling */
+        .photo-upload-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .photo-upload-label {
+            background: rgba(60, 40, 28, 0.4);
+            border: 1px dashed #6f4a32;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            color: #b0876a;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .photo-upload-label:hover {
+            background: rgba(60, 40, 28, 0.7);
+            border-color: #d4a373;
+        }
+        .photo-upload-label i {
+            font-size: 0.8rem;
+            color: #d4a373;
+        }
+        #photoInput {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -371,16 +413,25 @@
         <!-- PROFILE CARD -->
         <div class="card reveal">
             <div class="profile-row">
-                <div class="avatar-placeholder">
-                    <i class="fas fa-user-ninja"></i>
+                <div class="avatar-placeholder" id="avatarContainer">
+                    <!-- Default icon, will be replaced by image if uploaded -->
+                    <i class="fas fa-user-ninja" id="defaultIcon"></i>
+                    <img id="profilePhoto" src="lukman.png" alt="Passport Photo" style="display:none; width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="name-title">
-                    <h1>LUKMAN HAKIM <span class="water">· Water</span></h1>
+                    <h1>LUKMAN HAKIM <span class="engineer">· Engineer</span></h1>
                     <span class="badge"><i class="fas fa-microchip"></i> Electronic Technician · AI Seeker</span>
                     <div class="contact-mini">
                         <span><i class="fas fa-phone-alt"></i> 016-7932113</span>
                         <span><i class="fas fa-envelope"></i> lukmanasuwar00@gmail.com</span>
                         <span><i class="fas fa-map-pin"></i> Butterworth, Penang</span>
+                    </div>
+                    <!-- Photo upload control -->
+                    <div class="photo-upload-wrapper">
+                        <label for="photoInput" class="photo-upload-label">
+                            <i class="fas fa-camera"></i> Upload Passport Photo
+                        </label>
+                        <input type="file" id="photoInput" accept="image/*">
                     </div>
                 </div>
             </div>
@@ -633,6 +684,22 @@
             reveals.forEach(el => observer.observe(el));
             if (reveals.length) reveals[0].classList.add('visible');
         })();
+
+        // Photo upload handler
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const img = document.getElementById('profilePhoto');
+                    const icon = document.getElementById('defaultIcon');
+                    img.src = ev.target.result;
+                    img.style.display = 'block';
+                    icon.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 </body>
 </html>
