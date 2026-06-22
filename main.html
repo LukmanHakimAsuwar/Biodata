@@ -69,7 +69,7 @@
       100% { opacity: 1; transform: scale(1) rotate(0); }
     }
 
-    /* ----- HEADER with "WANTED" vibe ----- */
+    /* ----- HEADER with "WANTED" vibe & PICTURE ----- */
     .header {
       display: flex;
       flex-wrap: wrap;
@@ -79,16 +79,61 @@
       padding-bottom: 1.2rem;
       margin-bottom: 1.8rem;
       position: relative;
+      gap: 1rem;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* ----- PROFILE PICTURE (like wanted poster) ----- */
+    .profile-pic-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 5px solid #b4946a;
+      box-shadow: 0 0 0 3px #4d3e2b, 0 8px 20px rgba(0,0,0,0.5);
+      object-fit: cover;
+      background: #dccdb6;
+      transition: 0.3s;
+      filter: sepia(0.2) contrast(1.1);
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05) rotate(-3deg);
+      filter: sepia(0) contrast(1.2);
+      border-color: #c0392b;
+    }
+
+    /* Wanted stamp overlay on picture */
+    .wanted-stamp {
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      background: #c0392b;
+      color: #f7e8c8;
+      font-size: 0.55rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 20px;
+      border: 2px solid #f1c40f;
+      transform: rotate(8deg);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
     .straw-hat-icon {
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: #c0392b;
       filter: drop-shadow(0 0 6px #e67e22);
       animation: hatSway 3s infinite alternate ease-in-out;
@@ -109,7 +154,7 @@
     }
 
     .name-title h2 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 400;
       color: #4d3622;
       background: #e1cfb0;
@@ -363,6 +408,8 @@
       .resume-card { padding: 1rem; }
       .contact-row { flex-direction: column; align-items: center; gap: 0.4rem; border-radius: 30px; }
       .name-title h1 { font-size: 1.6rem; }
+      .profile-pic { width: 75px; height: 75px; }
+      .wanted-stamp { font-size: 0.45rem; bottom: -4px; right: -4px; padding: 1px 8px; }
     }
 
     /* small extra animation for one piece vibe */
@@ -389,9 +436,14 @@
   <!-- MAIN CV CARD -->
   <div class="resume-card">
 
-    <!-- HEADER : One Piece style -->
+    <!-- HEADER : One Piece style with PICTURE -->
     <div class="header">
       <div class="header-left">
+        <!-- PROFILE PICTURE - GANTI 'src' dengan gambar anda -->
+        <div class="profile-pic-wrapper">
+          <img class="profile-pic" src="lukman.png" alt="Lukman Hakim profile" />
+          <span class="wanted-stamp"><i class="fas fa-skull"></i> WANTED</span>
+        </div>
         <div class="straw-hat-icon"><i class="fas fa-hat-wizard"></i></div>
         <div class="name-title">
           <h1>LUKMAN HAKIM</h1>
@@ -399,7 +451,7 @@
         </div>
       </div>
       <div class="bounty-stamp">
-        <i class="fas fa-tag"></i> WANTED · 316,000,000
+        <i class="fas fa-tag"></i> BOUNTY · 316,000,000
       </div>
     </div>
 
